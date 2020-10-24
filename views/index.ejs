@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="/styles.css" />
+		<script src="/app.js" defer></script>
+		<title>Budget World</title>
+	</head>
+	<body>
+		<template id="card-template">
+			<article class="card">
+				<div class="image-container">
+					<img src="" alt="image" />
+					<button class="btn" id="save-btn">Save</button>
+				</div>
+				<!-- card info -->
+				<div class="card-info">
+					<h3>Item Name:<span></span></h3>
+					<h4>Price ($):<span></span></h4>
+					<h4>Description:<span></span></h4>
+				</div>
+				<!-- card footer -->
+				<div class="card-footer">
+					<div class="footer-info">
+						<span></span>
+						<span></span>
+					</div>
+					<div class="card-btns">
+						<button class="btn" id="edit-btn">edit</button>
+						<button class="btn" id="cancel-btn">Cancel</button>
+					</div>
+				</div>
+			</article>
+		</template>
+		<main>
+			<nav class="nav-bar">
+				<div class="logo-holder">
+					<img src="/images.png" alt="logo" class="image-logo" />
+				</div>
+				<section class="search-section">
+					<div class="search-input">
+						<label for="filter-title" class="search-label"
+							>Search by Country</label
+						>
+						<input
+							type="text"
+							id="country-filter"
+							placeholder="Type Country Name"
+							class="country-input"
+						/>
+					</div>
+					<div class="item-type">
+						<h4>Select Type</h4>
+						<select class="drop-menu" name="type" id="type-of-item">
+							<option value="">--</option>
+							<option value="Food/Beverage">Food/beverage</option>
+							<option value="Activity">Activity</option>
+							<option value="Transport">Transport</option>
+							<option value="Souvenirs">Souvenirs</option>
+							<option value="Other">other</option>
+						</select>
+						</select>
+					</div>
+					<div class="search-btn">
+						<button class="btn" id="search-btn">Search</button>
+					</div>
+				</section>
+				<div class="add-item">
+					<button class="btn" id="show-form">Add an Item</button>
+				</div>
+				<form action="/logout?_method=DELETE" method="POST">
+					<button class="log-out-btn" type="submit">Log Out</button>
+				</form>
+			</nav>
+			<section class="add-new-card">
+				<div class="add-new-form" id="add-form">
+					<div class="form-content">
+						<label for="name"> Item Name </label>
+						<input type="text" name="name" id="title" />
+						<label for="image-url">Image URL</label>
+						<input type="text" name="image-url" id="image-url" />
+						<label for="image-url">Country</label>
+						<input type="text" name="image-url" id="country-input" />
+						<label for="image-url">Price</label>
+						<input
+							type="text"
+							name="image-url"
+							id="price-input"
+							placeholder="$"
+						/>
+						<p>Description</p>
+						<textarea
+							name="comments"
+							id="item-description"
+							cols="30"
+							rows="2"
+						></textarea>
+						<select class="type-menu" name="type" id="type-input">
+							<option value="empty">--</option>
+							<option value="Food-&-beverage">Food/beverage</option>
+							<option value="Activity">Activity</option>
+							<option value="Transport">Transport</option>
+							<option value="Souvenirs">Souvenirs</option>
+							<option value="Other">Other</option>
+						</select>
+					</div>
+					<div class="form-actions">
+						<button class="btn btn--passive" id="form-cancel-btn">
+							Cancel
+						</button>
+						<button class="btn btn--success" id="add-new-btn">Add</button>
+					</div>
+				</div>
+			</section>
+			<section class="cards">
+				<div class="cards-center" id="cards-hook"></div>
+			</section>
+			<footer class="footer">
+				<div class="footer-content"></div>
+				<p>copyright &copy; all reserved</p>
+			</footer>
+		</main>
+	</body>
+</html>

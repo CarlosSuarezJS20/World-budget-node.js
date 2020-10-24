@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="/styles.css" />
+		<title>Budget World</title>
+	</head>
+
+	<body class="login-page">
+		<form action="/login" method="POST" class="login-option">
+			<div class="login-header">
+				<img src="/images.png" alt="logo" />
+				<h1>Budget World</h1>
+			</div>
+			<label for="email-address" value="email-address">Email Address:</label>
+			<input
+				type="email"
+				name="email"
+				id="user-email"
+				placeholder="Type your email"
+			/>
+			<label for="password" value="user-password">Password:</label>
+			<input
+				type="password"
+				name="password"
+				id="user-password"
+				placeholder="Type your Password"
+			/>
+			<button id="login-btn" class="btn">Log In</button>
+			<p class="login-message">
+				<% if (messages.error) { %> <%= messages.error %> <% } %>
+			</p>
+			<p>New User? <a href="/register">Register Here</a></p>
+		</form>
+	</body>
+</html>

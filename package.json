@@ -1,0 +1,47 @@
+{
+  "name": "authentication-nodejs",
+  "version": "1.0.0",
+  "description": "App World Budget",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "devStart": "nodemon server.js"
+  },
+  "resolutions": {
+    "https-proxy-agent": "^3.0.0"
+  },
+  "keywords": [
+    "heroku"
+  ],
+  "author": "Carlos",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "cli": "^1.0.1",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "express-flash": "0.0.2",
+    "express-session": "^1.17.1",
+    "heroku": "^7.46.2",
+    "method-override": "^3.0.0",
+    "nodemon": "^2.0.6",
+    "npm-force-resolutions": "0.0.3",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "bcrypt": "^5.0.0",
+    "dotenv": "^8.2.0",
+    "nodemon": "^2.0.6",
+    "npm-force-resolutions": "0.0.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CarlosSuarezJS20/World-budget-node.js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/CarlosSuarezJS20/World-budget-node.js/issues"
+  },
+  "homepage": "https://github.com/CarlosSuarezJS20/World-budget-node.js#readme"
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="/styles.css" />
+		<title>Budget World</title>
+	</head>
+
+	<body class="login-page">
+		<form action="/register" method="POST" class="register-page">
+			<div class="login-header">
+				<img src="/images.png" alt="logo" />
+			</div>
+			<div class="registration-header">
+				<h1>Register Now</h1>
+				<h3>Just a few steps!</h3>
+			</div>
+			<label for="email" value="email">Email Address:</label>
+			<input
+				type="email"
+				name="email"
+				id="new-user-email"
+				placeholder="Type your email"
+			/>
+			<label for="password" value="password">New Password:</label>
+			<input
+				type="password"
+				name="password"
+				id="new-user-password"
+				placeholder="Choose Your Password"
+			/>
+			<label for="confirm_password" value="confirm-password">
+				Confirm Your Password:</label
+			>
+			<input
+				type="password"
+				name="confirmed_password"
+				id="confirm-password"
+				placeholder="Type Password Again"
+			/>
+			<button id="create-btn" class="btn">Create an Account</button>
+		</form>
+		<footer><a href="/">home</a></footer>
+	</body>
+</html>
