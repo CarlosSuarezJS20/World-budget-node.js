@@ -42,7 +42,7 @@ const checkAuthentication = (req, res, next) => {
 	return next();
 };
 
-app.get('/', checkAuthentication, (req, res) => {
+app.get('/', (req, res) => {
 	return res.render('index.ejs');
 });
 
