@@ -1,3 +1,6 @@
+// fix remaining countdown add new
+// price bug not saving correctly and input is not well formated
+
 //ADD AN ITEM SELECTORS
 const showFormItemBtn = document.getElementById('show-form');
 const addItem = document.querySelector('.add-new-card');
@@ -202,7 +205,6 @@ const addItemHandler = () => {
 		alert('All fields must be provided and a category should be added!');
 		return;
 	}
-
 	clearInputs();
 
 	const newItem = {
@@ -252,6 +254,11 @@ class SingleItemRendering {
 		this.description.textContent = this.item.description;
 		this.spans[2].textContent = this.item.category;
 		this.spans[3].textContent = this.item.country;
+		this.counterEl.textContent = charactersCount(
+			this.counterEl,
+			this.description,
+			100
+		);
 		this.currentPrice = this.spans[1].textContent;
 		this.currentDescription = this.description.textContent;
 
@@ -269,15 +276,6 @@ class SingleItemRendering {
 		document.getElementById(this.hookPosition).append(itemEl);
 	}
 
-	saveNewContent() {
-		this.spans[1].contentEditable = false;
-		this.spans[1].classList.remove('editable');
-		this.description.classList.remove('card-info-edit');
-		this.cancelBtnAccess.style.display = 'none';
-		this.saveBtnAccess.style.display = 'none';
-		this.counterEl.style.display = 'none';
-	}
-
 	editContent() {
 		this.spans[1].contentEditable = true;
 		this.spans[1].classList.add('editable');
@@ -285,11 +283,6 @@ class SingleItemRendering {
 		this.saveBtnAccess.style.display = 'block';
 		this.cancelBtnAccess.style.display = 'block';
 		this.counterEl.style.display = 'block';
-		this.counterEl.textContent = charactersCount(
-			this.counterEl,
-			this.description,
-			100
-		);
 	}
 
 	cancelEdit() {
@@ -298,9 +291,20 @@ class SingleItemRendering {
 		this.saveBtnAccess.style.display = 'none';
 		this.cancelBtnAccess.style.display = 'none';
 		this.description.classList.remove('card-info-edit');
-		this.spans[1].innerHTML = this.currentPrice;
-		this.description.value = this.currentDescription;
 		this.counterEl.style.display = 'none';
+		this.spans[1].textContent = this.currentPrice;
+		this.description.value = this.currentDescription;
+	}
+
+	saveNewContent() {
+		this.spans[1].contentEditable = false;
+		this.spans[1].classList.remove('editable');
+		this.description.classList.remove('card-info-edit');
+		this.cancelBtnAccess.style.display = 'none';
+		this.saveBtnAccess.style.display = 'none';
+		this.counterEl.style.display = 'none';
+		this.currentPrice = this.spans[1].textContent;
+		this.currentDescription = this.description.textContent;
 	}
 }
 
@@ -324,6 +328,7 @@ const clearInputs = () => {
 	}
 	descriptionInputEl.value = '';
 	typeOfItemInputEl.value = 'empty';
+	remainingCharactersEl.textContent = '';
 };
 
 // search on Enter
