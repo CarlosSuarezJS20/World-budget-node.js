@@ -1,3 +1,9 @@
+/* 
+Add action search on Enter 
+Fix CSS look
+Text limit editable 
+*/
+
 //ADD AN ITEM SELECTORS
 const showFormItemBtn = document.getElementById('show-form');
 const addItem = document.querySelector('.add-new-card');
