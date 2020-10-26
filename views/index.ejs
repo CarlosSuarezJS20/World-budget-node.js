@@ -18,7 +18,16 @@
 				<div class="card-info">
 					<h3>Item Name:<span></span></h3>
 					<h4>Price ($):<span></span></h4>
-					<h4>Description:<span></span></h4>
+					<h4>Description:</h4>
+					<textarea
+						name="comments"
+						class = "card-info-text"
+						id="item-description"
+						cols="30"
+						rows="3"
+						maxlength="100"
+					></textarea>
+					<h5 class="character-counter" id="card-character-counter"></h5>
 				</div>
 				<!-- card footer -->
 				<div class="card-footer">
@@ -62,12 +71,12 @@
 						</select>
 						</select>
 					</div>
-					<div class="search-btn">
+					<div class="search-btn" >
 						<button class="btn" id="search-btn">Search</button>
 					</div>
 				</section>
 				<div class="add-item">
-					<button class="btn add-item-btn" id="show-form">Add an Item</button>
+					<button class="btn add-item-btn" id="show-form">Add New</button>
 				</div>
 				<form action="/logout?_method=DELETE" method="POST">
 					<button class="log-out-btn" type="submit">Log Out</button>
@@ -95,7 +104,9 @@
 							id="item-description"
 							cols="30"
 							rows="2"
+							maxlength="100"
 						></textarea>
+						<span class="max-lenght" id="max-lenght-count"></span>
 						<select class="type-menu" name="type" id="type-input">
 							<option value="empty">--</option>
 							<option value="Food-&-beverage">Food/beverage</option>

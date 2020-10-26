@@ -1,15 +1,10 @@
-/* 
-Add action search on Enter 
-Fix CSS look
-Text limit editable 
-*/
-
 //ADD AN ITEM SELECTORS
 const showFormItemBtn = document.getElementById('show-form');
 const addItem = document.querySelector('.add-new-card');
 const addCardForm = document.getElementById('add-form');
 const descriptionInputEl = document.getElementById('item-description');
 const typeOfItemInputEl = document.getElementById('type-input');
+const remainingCharactersEl = document.getElementById('max-lenght-count');
 
 // buttons selectors Add An Item Form
 const cancelBtnAccess = document.getElementById('form-cancel-btn');
@@ -115,6 +110,16 @@ const items = [
 			'Great visits, price includes return ticket, welcome drink and lunch',
 		category: 'Activity',
 	},
+	{
+		id: Math.random().toFixed(5),
+		itemTitle: 'Bandeja Paisa',
+		imageUrl:
+			'https://www.cocina-colombiana.com/base/stock/Recipe/232-image/232-image_web.jpg',
+		country: 'COLOMBIA',
+		price: 10,
+		description: 'Had this delicious ditch during my stay in Medellin.',
+		category: 'Food/Beverage',
+	},
 ];
 
 //
@@ -218,6 +223,10 @@ const addItemHandler = () => {
 	addItem.classList.remove('show-add-card');
 };
 
+// const textAreaCharCount = (string) {
+
+// }
+
 // RENDER FOR ITEM
 class SingleItemRendering {
 	constructor(item, renderHook) {
@@ -236,14 +245,15 @@ class SingleItemRendering {
 		itemEl.id = this.item.id;
 		itemEl.querySelector('img').src = this.item.imageUrl;
 		this.spans = itemEl.querySelectorAll('span');
+		this.description = itemEl.querySelector('textarea');
+		this.counterEl = itemEl.querySelector('h5');
 		this.spans[0].textContent = this.item.itemTitle;
 		this.spans[1].textContent = this.item.price;
-		this.spans[2].textContent = this.item.description;
-		this.spans[3].textContent = this.item.category;
-		this.spans[4].textContent = this.item.country;
-
+		this.description.textContent = this.item.description;
+		this.spans[2].textContent = this.item.category;
+		this.spans[3].textContent = this.item.country;
 		this.currentPrice = this.spans[1].textContent;
-		this.currentDescription = this.spans[2].textContent;
+		this.currentDescription = this.description.textContent;
 
 		this.editBtnAccess = itemEl.querySelectorAll('button');
 		this.saveBtnAccess = this.editBtnAccess[0];
@@ -262,30 +272,35 @@ class SingleItemRendering {
 	saveNewContent() {
 		this.spans[1].contentEditable = false;
 		this.spans[1].classList.remove('editable');
-		this.spans[2].contentEditable = false;
-		this.spans[2].classList.remove('editable');
+		this.description.classList.remove('card-info-edit');
 		this.cancelBtnAccess.style.display = 'none';
 		this.saveBtnAccess.style.display = 'none';
+		this.counterEl.style.display = 'none';
 	}
 
 	editContent() {
 		this.spans[1].contentEditable = true;
 		this.spans[1].classList.add('editable');
-		this.spans[2].contentEditable = true;
-		this.spans[2].classList.add('editable');
+		this.description.classList.add('card-info-edit');
 		this.saveBtnAccess.style.display = 'block';
 		this.cancelBtnAccess.style.display = 'block';
+		this.counterEl.style.display = 'block';
+		this.counterEl.textContent = charactersCount(
+			this.counterEl,
+			this.description,
+			100
+		);
 	}
 
 	cancelEdit() {
 		this.spans[1].contentEditable = false;
 		this.spans[1].classList.remove('editable');
-		this.spans[2].contentEditable = false;
-		this.spans[2].classList.remove('editable');
 		this.saveBtnAccess.style.display = 'none';
 		this.cancelBtnAccess.style.display = 'none';
+		this.description.classList.remove('card-info-edit');
 		this.spans[1].innerHTML = this.currentPrice;
-		this.spans[2].innerHTML = this.currentDescription;
+		this.description.value = this.currentDescription;
+		this.counterEl.style.display = 'none';
 	}
 }
 
@@ -311,6 +326,29 @@ const clearInputs = () => {
 	typeOfItemInputEl.value = 'empty';
 };
 
+// search on Enter
+const filterInputs = [countryFilterAccess, searchCategoryMenu];
+filterInputs.forEach((element) => {
+	element.addEventListener('keyup', (event) => {
+		if (event.keyCode === 13) {
+			event.preventDefault();
+			searchBtnAccess.click();
+		}
+	});
+});
+
+const charactersCount = (charactersEl, descriptionEl, textMaxLenght) => {
+	const maxLenght = textMaxLenght;
+	descriptionEl.addEventListener('input', () => {
+		const remainingCharacters = maxLenght - descriptionEl.value.length;
+		const textColor = remainingCharacters <= maxLenght * 0.1 ? 'red' : null;
+		charactersEl.textContent = `${remainingCharacters} characters Remaining`;
+		charactersEl.style.color = textColor;
+	});
+};
+
+charactersCount(remainingCharactersEl, descriptionInputEl, 100);
+
 // At the moment I'm instantiating this class to render the "items array", which contains some hardcored items
 const renderDataBaseItems = () => {
 	for (let item of items) {
@@ -329,6 +367,7 @@ showFormItemBtn.addEventListener('click', () => {
 // card form btns
 cancelBtnAccess.addEventListener('click', () => {
 	addItem.classList.remove('show-add-card');
+	clearInputs();
 });
 // add a new card
 addItemBtnAccess.addEventListener('click', addItemHandler);
