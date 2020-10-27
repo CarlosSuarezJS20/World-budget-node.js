@@ -145,7 +145,7 @@ const filteredItems = (countryValue, searchCategory) => {
 
 const addCancelFilterBtn = () => {
 	const cancelBtn = document.createElement('button');
-	cancelBtn.textContent = 'Cancel Search';
+	cancelBtn.textContent = 'Cancel';
 	cancelBtn.id = 'cancel-search-btn';
 	cancelBtn.className = 'btn';
 	document.querySelector('.search-btn').append(cancelBtn);
@@ -248,18 +248,19 @@ class SingleItemRendering {
 		itemEl.querySelector('img').src = this.item.imageUrl;
 		this.spans = itemEl.querySelectorAll('span');
 		this.description = itemEl.querySelector('textarea');
-		this.counterEl = itemEl.querySelector('h5');
+		this.priceInput = itemEl.querySelector('input');
+		this.priceInput.value = this.item.price;
 		this.spans[0].textContent = this.item.itemTitle;
-		this.spans[1].textContent = this.item.price;
 		this.description.textContent = this.item.description;
-		this.spans[2].textContent = this.item.category;
-		this.spans[3].textContent = this.item.country;
+		this.spans[1].textContent = this.item.category;
+		this.spans[2].textContent = this.item.country;
+		this.counterEl = itemEl.querySelector('h5');
 		this.counterEl.textContent = charactersCount(
 			this.counterEl,
 			this.description,
 			100
 		);
-		this.currentPrice = this.spans[1].textContent;
+		this.currentPrice = this.priceInput.value;
 		this.currentDescription = this.description.textContent;
 
 		this.editBtnAccess = itemEl.querySelectorAll('button');
@@ -277,34 +278,31 @@ class SingleItemRendering {
 	}
 
 	editContent() {
-		this.spans[1].contentEditable = true;
-		this.spans[1].classList.add('editable');
 		this.description.classList.add('card-info-edit');
+		this.priceInput.classList.add('price-edit-active');
 		this.saveBtnAccess.style.display = 'block';
 		this.cancelBtnAccess.style.display = 'block';
 		this.counterEl.style.display = 'block';
 	}
 
 	cancelEdit() {
-		this.spans[1].contentEditable = false;
-		this.spans[1].classList.remove('editable');
-		this.saveBtnAccess.style.display = 'none';
-		this.cancelBtnAccess.style.display = 'none';
+		this.priceInput.classList.remove('price-edit-active');
 		this.description.classList.remove('card-info-edit');
 		this.counterEl.style.display = 'none';
-		this.spans[1].textContent = this.currentPrice;
+		this.saveBtnAccess.style.display = 'none';
+		this.cancelBtnAccess.style.display = 'none';
+		this.priceInput.value = this.currentPrice;
 		this.description.value = this.currentDescription;
 	}
 
 	saveNewContent() {
-		this.spans[1].contentEditable = false;
-		this.spans[1].classList.remove('editable');
+		this.priceInput.classList.remove('price-edit-active');
 		this.description.classList.remove('card-info-edit');
 		this.cancelBtnAccess.style.display = 'none';
 		this.saveBtnAccess.style.display = 'none';
 		this.counterEl.style.display = 'none';
-		this.currentPrice = this.spans[1].textContent;
-		this.currentDescription = this.description.textContent;
+		this.currentPrice = this.priceInput.value;
+		this.currentDescription = this.description.value;
 	}
 }
 
