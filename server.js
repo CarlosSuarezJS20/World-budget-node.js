@@ -42,11 +42,6 @@ const checkAuthentication = (req, res, next) => {
 	return next();
 };
 
-app.get('/', (req, res) => {
-	return res.render('index.ejs');
-});
-
-/* Allow redirection to home  */
 app.get('/', checkAuthentication, (req, res) => {
 	return res.render('index.ejs');
 });

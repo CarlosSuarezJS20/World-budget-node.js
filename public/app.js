@@ -1,6 +1,3 @@
-// fix remaining countdown add new
-// price bug not saving correctly and input is not well formated
-
 //ADD AN ITEM SELECTORS
 const showFormItemBtn = document.getElementById('show-form');
 const addItem = document.querySelector('.add-new-card');
@@ -267,12 +264,13 @@ class SingleItemRendering {
 		this.saveBtnAccess = this.editBtnAccess[0];
 		const editBtnAccess = this.editBtnAccess[1];
 		this.cancelBtnAccess = this.editBtnAccess[2];
-		this.saveBtnAccess.addEventListener(
-			'click',
-			this.saveNewContent.bind(this)
-		);
+
 		editBtnAccess.addEventListener('click', this.editContent.bind(this));
 		this.cancelBtnAccess.addEventListener('click', this.cancelEdit.bind(this));
+		this.saveBtnAccess.addEventListener(
+			'click',
+			this.saveNewContent.bind(this, this.item)
+		);
 
 		document.getElementById(this.hookPosition).append(itemEl);
 	}
@@ -295,7 +293,7 @@ class SingleItemRendering {
 		this.description.value = this.currentDescription;
 	}
 
-	saveNewContent() {
+	saveNewContent(item) {
 		this.priceInput.classList.remove('price-edit-active');
 		this.description.classList.remove('card-info-edit');
 		this.cancelBtnAccess.style.display = 'none';
@@ -303,6 +301,9 @@ class SingleItemRendering {
 		this.counterEl.style.display = 'none';
 		this.currentPrice = this.priceInput.value;
 		this.currentDescription = this.description.value;
+		item.price = this.priceInput.value;
+		item.description = this.description.value;
+		console.log(item);
 	}
 }
 
@@ -350,14 +351,13 @@ const charactersCount = (charactersEl, descriptionEl, textMaxLenght) => {
 	});
 };
 
-charactersCount(remainingCharactersEl, descriptionInputEl, 100);
-
 // At the moment I'm instantiating this class to render the "items array", which contains some hardcored items
 const renderDataBaseItems = () => {
 	for (let item of items) {
 		const newItem = new SingleItemRendering(item, 'cards-hook');
 		newItem.render();
 	}
+	charactersCount(remainingCharactersEl, descriptionInputEl, 100);
 };
 
 renderDataBaseItems();

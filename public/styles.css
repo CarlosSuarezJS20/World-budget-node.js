@@ -460,6 +460,21 @@ Register pages
 	margin: 2rem 0;
 }
 
+@media screen and (min-width: 700px) {
+	.add-new-card {
+		position: fixed;
+		padding: 5rem 5rem;
+		background: var(--main-white);
+		min-width: 0;
+		max-width: 50%;
+		max-height: 60%;
+		margin-top: 15rem;
+		margin-left: 10rem;
+		margin-right: 10rem;
+		z-index: 1;
+	}
+}
+
 @media screen and (min-width: 970px) {
 	.add-new-card {
 		position: fixed;
@@ -481,7 +496,7 @@ Register pages
 		padding: 5rem 10rem;
 		background: var(--main-white);
 		max-width: 40%;
-		max-height: 70%;
+		max-height: 50%;
 		margin-top: 5rem;
 		margin-left: 15rem;
 		margin-right: 0;
