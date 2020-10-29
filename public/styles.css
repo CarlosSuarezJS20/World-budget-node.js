@@ -340,7 +340,7 @@ Register pages
 .register-page {
 	display: block;
 	position: relative;
-	margin-top: 150px;
+	margin-top: 50px;
 	padding: 50px;
 	background: rgba(201, 201, 201, 0.75);
 	border-radius: 5px;
@@ -568,7 +568,7 @@ Cards
 
 .price-edit-active {
 	border: 1px solid var(--lighter-title-color);
-	background-color: rgb(245, 245, 156);
+	background-color: rgb(243, 243, 243);
 	pointer-events: initial;
 	resize: none;
 }
@@ -593,13 +593,16 @@ Cards
 
 .card-info-edit {
 	border: 1px solid var(--lighter-title-color);
-	background-color: rgb(245, 245, 156);
+	background-color: rgb(243, 243, 243);
 	pointer-events: initial;
 	resize: none;
 }
 
 .character-counter {
 	display: none;
+	text-align: right;
+	font-weight: 400;
+	color: var(--lighter-title-color);
 }
 
 .card-footer {
@@ -633,35 +636,23 @@ Cards
 	justify-items: center;
 }
 
-#edit-btn,
-#cancel-btn {
-	padding: 0 1rem;
-	justify-content: center;
+.edit-card-btns {
+	display: grid;
+	grid-template-columns: repeat(2, 70px);
+	justify-items: right;
+	margin-left: 1rem;
 }
 
-#cancel-btn {
+#cancel-btn,
+#save-btn {
 	display: none;
-	margin-left: 0.5rem;
+	margin-right: 2rem;
+	background: var(--title-color);
+	color: var(--main-white);
 }
 
 .image-container {
 	position: relative;
-}
-
-#save-btn {
-	position: absolute;
-	right: 0;
-	bottom: 0;
-	border-radius: 10px;
-	padding: 0.5rem;
-	display: none;
-}
-
-.editable {
-	background-color: rgb(245, 245, 156);
-	border: 1px solid rgb(192, 191, 191);
-	border-radius: var(--border-radius);
-	transition: var(--transition);
 }
 
 @media screen and (min-width: 1070px) {

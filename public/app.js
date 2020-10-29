@@ -1,21 +1,19 @@
-//ADD AN ITEM SELECTORS
+//ADD NEW FORM ACCESS
 const showFormItemBtn = document.getElementById('show-form');
 const addItem = document.querySelector('.add-new-card');
 const addCardForm = document.getElementById('add-form');
 const descriptionInputEl = document.getElementById('item-description');
 const typeOfItemInputEl = document.getElementById('type-input');
 const remainingCharactersEl = document.getElementById('max-lenght-count');
-
-// buttons selectors Add An Item Form
+// add new Form buttons
 const cancelBtnAccess = document.getElementById('form-cancel-btn');
 const addItemBtnAccess = document.getElementById('add-new-btn');
 
-// SEARCH CAPABILITY SELECTORS
+// SEARCH CAPABILITY NAVBAR
 const countryFilterAccess = document.getElementById('country-filter');
 const searchBtnAccess = document.getElementById('search-btn');
 const itemElements = document.getElementById('cards-hook').children;
-// Search Info from USER
-const searchCategoryMenu = document.getElementById('type-of-item');
+const searchCategoryDropMenu = document.getElementById('type-of-item');
 
 const items = [
 	{
@@ -25,7 +23,7 @@ const items = [
 			'https://www.2foodtrippers.com/wp-content/uploads/2016/08/Delicious-Thai-Food-Pad-Thai.jpg.webp',
 		country: 'THAILAND',
 		price: 5,
-		description: 'Street food in Bankok',
+		description: 'Street food in Bangkok',
 		category: 'Food/Beverage',
 	},
 	{
@@ -46,7 +44,7 @@ const items = [
 		country: 'THAILAND',
 		price: 7.5,
 		description:
-			'Cheap rental bike, Ko Thao. This is average price around Thailand',
+			'Cheap rental bike, Ko Thao. This is the average price around Thailand',
 		category: 'Transport',
 	},
 	{
@@ -121,9 +119,7 @@ const items = [
 		category: 'Food/Beverage',
 	},
 ];
-
-//
-//
+console.log(items);
 
 // NAVBAR SEARCH CAPABILITY
 
@@ -151,14 +147,14 @@ const addCancelFilterBtn = () => {
 			el.style.display = '';
 		}
 		countryFilterAccess.value = '';
-		searchCategoryMenu.value = '';
+		searchCategoryDropMenu.value = '';
 		document.getElementById(cancelBtn.id).remove();
 	});
 };
 
 const searchBtnHandler = () => {
 	let countryValue = countryFilterAccess.value.trim().toUpperCase();
-	let searchCategory = searchCategoryMenu.value.trim();
+	let searchCategory = searchCategoryDropMenu.value.trim();
 	if (countryValue === '' && searchCategory === '') {
 		return;
 	}
@@ -260,12 +256,17 @@ class SingleItemRendering {
 		this.currentPrice = this.priceInput.value;
 		this.currentDescription = this.description.textContent;
 
-		this.editBtnAccess = itemEl.querySelectorAll('button');
-		this.saveBtnAccess = this.editBtnAccess[0];
-		const editBtnAccess = this.editBtnAccess[1];
-		this.cancelBtnAccess = this.editBtnAccess[2];
+		this.editBtnsAccess = itemEl.querySelectorAll('button');
+		this.saveBtnAccess = this.editBtnsAccess[0];
+		this.cancelBtnAccess = this.editBtnsAccess[1];
+		const editBtnAccess = this.editBtnsAccess[2];
+		const deleteBtnAccess = this.editBtnsAccess[3];
 
 		editBtnAccess.addEventListener('click', this.editContent.bind(this));
+		deleteBtnAccess.addEventListener(
+			'click',
+			this.deleteCard.bind(this, this.item)
+		);
 		this.cancelBtnAccess.addEventListener('click', this.cancelEdit.bind(this));
 		this.saveBtnAccess.addEventListener(
 			'click',
@@ -303,11 +304,17 @@ class SingleItemRendering {
 		this.currentDescription = this.description.value;
 		item.price = this.priceInput.value;
 		item.description = this.description.value;
-		console.log(item);
+	}
+
+	deleteCard(targetItem) {
+		const itemIndex = items.findIndex((it) => it.id === targetItem.id);
+		items.splice(itemIndex, 1);
+		document.getElementById(targetItem.id).remove();
 	}
 }
 
 // ======= UTILITY FUNCTIONS ==========
+// Id generator to New items/cards add by user
 function* taskId() {
 	let index = 0;
 	while (true) {
@@ -317,7 +324,7 @@ function* taskId() {
 
 const idGeneration = taskId();
 
-// Clear Inputs from the form
+// Clear Inputs from the add new form
 const clearInputs = () => {
 	const addFormEl = document
 		.getElementById('add-form')
@@ -330,8 +337,8 @@ const clearInputs = () => {
 	remainingCharactersEl.textContent = '';
 };
 
-// search on Enter
-const filterInputs = [countryFilterAccess, searchCategoryMenu];
+// search on press Enter key
+const filterInputs = [countryFilterAccess, searchCategoryDropMenu];
 filterInputs.forEach((element) => {
 	element.addEventListener('keyup', (event) => {
 		if (event.keyCode === 13) {
@@ -341,6 +348,7 @@ filterInputs.forEach((element) => {
 	});
 });
 
+// Displays character countdown on add new form description
 const charactersCount = (charactersEl, descriptionEl, textMaxLenght) => {
 	const maxLenght = textMaxLenght;
 	descriptionEl.addEventListener('input', () => {
@@ -351,7 +359,8 @@ const charactersCount = (charactersEl, descriptionEl, textMaxLenght) => {
 	});
 };
 
-// At the moment I'm instantiating this class to render the "items array", which contains some hardcored items
+// Renders localdata from items array
+
 const renderDataBaseItems = () => {
 	for (let item of items) {
 		const newItem = new SingleItemRendering(item, 'cards-hook');

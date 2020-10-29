@@ -4,15 +4,14 @@ const app = express();
 const path = require('path');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
-const initializePassport = require('./passport');
+const initializePassword = require('./passport');
 const eFlash = require('express-flash');
 const eSession = require('express-session');
 const methodOv = require('method-override');
 
 const users = [];
 
-initializePassport(
-	passport,
+initializePassword(
 	(email) => users.find((user) => user.email === email),
 	(id) => users.find((user) => user.id === id)
 );
@@ -42,9 +41,13 @@ const checkAuthentication = (req, res, next) => {
 	return next();
 };
 
-app.get('/', checkAuthentication, (req, res) => {
+app.get('/', (req, res) => {
 	return res.render('index.ejs');
 });
+
+// app.get('/', checkAuthentication, (req, res) => {
+// 	return res.render('index.ejs');
+// });
 
 const checkNotAuthenticated = (req, res, next) => {
 	if (req.isAuthenticated()) {
@@ -72,15 +75,18 @@ app.get('/register', checkNotAuthenticated, (req, res) => {
 });
 
 app.post('/register', checkNotAuthenticated, async (req, res) => {
-	if (req.body.password !== req.body.confirmed_password) {
-	}
+	if (req.body.passport !== req.body.confirmed_password) {
+		res.redirect('/register');
 
+		return;
+	}
 	try {
 		const hashedPassword = await bcrypt.hash(req.body.password, 10);
 		users.push({
 			id: Date.now().toString(),
 			email: req.body.email,
 			password: hashedPassword,
+			confirmedPassword: req.body.confirmed_password,
 		});
 		res.redirect('/login');
 	} catch {
