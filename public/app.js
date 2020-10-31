@@ -1,4 +1,4 @@
-//ADD NEW FORM ACCESS
+//Input ad new (price)
 const showFormItemBtn = document.getElementById('show-form');
 const addItem = document.querySelector('.add-new-card');
 const addCardForm = document.getElementById('add-form');

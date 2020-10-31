@@ -86,7 +86,6 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
 			id: Date.now().toString(),
 			email: req.body.email,
 			password: hashedPassword,
-			confirmedPassword: req.body.confirmed_password,
 		});
 		res.redirect('/login');
 	} catch {
@@ -100,5 +99,5 @@ app.delete('/logout', (req, res) => {
 	res.redirect('/login');
 });
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 app.listen(port);
