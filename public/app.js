@@ -1,4 +1,5 @@
 //Input ad new (price)
+//currency
 const showFormItemBtn = document.getElementById('show-form');
 const addItem = document.querySelector('.add-new-card');
 const addCardForm = document.getElementById('add-form');
@@ -133,6 +134,7 @@ const filteredItems = (countryValue, searchCategory) => {
 	if (countryValue) {
 		return items.filter((item) => item.country === countryValue);
 	}
+	
 	return items.filter((item) => item.category === searchCategory);
 };
 
@@ -158,7 +160,6 @@ const searchBtnHandler = () => {
 	if (countryValue === '' && searchCategory === '') {
 		return;
 	}
-	console.log(countryValue, searchCategory);
 	const results = filteredItems(countryValue, searchCategory);
 
 	if (results.length === 0) {

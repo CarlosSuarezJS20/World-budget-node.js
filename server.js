@@ -91,7 +91,6 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
 	} catch {
 		res.redirect('/register');
 	}
-	console.log(users);
 });
 
 app.delete('/logout', (req, res) => {
@@ -99,5 +98,5 @@ app.delete('/logout', (req, res) => {
 	res.redirect('/login');
 });
 
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 3001;
 app.listen(port);
