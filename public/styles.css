@@ -191,7 +191,7 @@ LayOut-navbar
 		display: grid;
 		grid-template-columns: repeat(4, 1fr);
 		text-align: center;
-		padding-bottom: rem;
+		padding-bottom: 1rem;
 	}
 
 	.search-section {
@@ -235,7 +235,6 @@ LayOut-navbar
 		margin: 0;
 		border-right: 5px solid var(--primary-color);
 		border-bottom: none;
-
 		border-bottom-left-radius: var(--border-radius);
 		border-bottom-right-radius: var(--border-radius);
 		display: grid;
