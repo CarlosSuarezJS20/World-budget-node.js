@@ -530,6 +530,7 @@ Cards
 	grid-template-rows: auto 1fr auto;
 }
 
+/* merge with the class above */
 .cards-center {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(360px, 1.5fr));

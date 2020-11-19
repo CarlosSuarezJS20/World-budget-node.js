@@ -210,10 +210,10 @@ const addItemHandler = () => {
 		description: descriptionInput,
 		category: typeOfItemInput,
 	};
-	console.log(newItem);
+
 
 	items.push(newItem);
-	console.log(items);
+
 	const newItemRender = new SingleItemRendering(newItem, 'cards-hook');
 	newItemRender.render();
 	addItem.classList.remove('show-add-card');
