@@ -134,7 +134,7 @@ const filteredItems = (countryValue, searchCategory) => {
 	if (countryValue) {
 		return items.filter((item) => item.country === countryValue);
 	}
-	
+
 	return items.filter((item) => item.category === searchCategory);
 };
 
@@ -192,6 +192,7 @@ const addItemHandler = () => {
 		itemTitleInput.trim() === '' ||
 		imageInput.trim() === '' ||
 		countryInput.trim() === '' ||
+		// fix the pricing bug
 		priceInput.trim() === '' ||
 		descriptionInput.trim() === '' ||
 		typeOfItemInput === 'empty'
@@ -210,7 +211,6 @@ const addItemHandler = () => {
 		description: descriptionInput,
 		category: typeOfItemInput,
 	};
-
 
 	items.push(newItem);
 
